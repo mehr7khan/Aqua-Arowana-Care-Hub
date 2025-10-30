@@ -19,7 +19,6 @@
       background: var(--bg);
       color: #222;
       line-height: 1.6;
-      scroll-behavior: smooth;
     }
     header {
       background: var(--white);
@@ -54,14 +53,19 @@
       text-decoration: none;
       color: #333;
       font-size: 0.9rem;
+      padding-bottom: 3px;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
     }
-    .nav a:hover {
-      color: #006d77;
+    .nav a.active {
+      color: var(--primary);
+      border-color: var(--primary);
     }
     .hero {
       background: linear-gradient(115deg, #093f53 0%, #006d77 68%, #0fa3b1 100%);
       color: #fff;
       padding: 4.5rem 0 4rem;
+      margin-bottom: 0;
     }
     .hero-grid {
       display: grid;
@@ -74,7 +78,6 @@
       margin-bottom: 1rem;
       line-height: 1.1;
     }
-    .hero p { margin-bottom: 1rem; }
     .btn {
       display: inline-block;
       background: var(--accent);
@@ -85,10 +88,16 @@
       font-weight: 600;
       font-size: 0.9rem;
     }
-    section { padding: 3.3rem 0; }
     .section-title {
       text-align: center;
       margin-bottom: 2.3rem;
+    }
+    section.tab-section {
+      padding: 3.3rem 0;
+      display: none;        /* hidden by default, JS will show one */
+    }
+    section.tab-section.active-tab {
+      display: block;
     }
     .cards {
       display: grid;
@@ -102,28 +111,13 @@
       box-shadow: 0 4px 20px rgba(0,0,0,0.03);
       border: 1px solid rgba(0,0,0,0.03);
     }
-    .card h4 {
-      margin-bottom: 0.4rem;
-      color: var(--dark);
-    }
-    .tag {
-      display: inline-block;
-      background: rgba(0,109,119,0.05);
-      color: var(--dark);
-      font-size: 0.7rem;
-      padding: 0.3rem 0.6rem;
-      border-radius: 999px;
-      margin-bottom: 0.5rem;
-    }
     .two-col {
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
       gap: 1.5rem;
       align-items: start;
     }
-    .list-check li {
-      margin-bottom: 0.45rem;
-    }
+    .list-check li { margin-bottom: 0.45rem; }
     .media-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -157,10 +151,9 @@
       cursor: pointer;
       transition: transform 0.15s ease;
     }
-    .image-grid img:hover {
-      transform: scale(1.02);
-    }
-    /* ===== LIGHTBOX (popup) ===== */
+    .image-grid img:hover { transform: scale(1.02); }
+
+    /* LIGHTBOX */
     .lightbox {
       display: none;
       position: fixed;
@@ -218,13 +211,37 @@
     .lightbox-prev:hover, .lightbox-next:hover {
       background: rgba(0,0,0,0.6);
     }
+
+    .contact-actions {
+      margin-top: 1rem;
+      display: flex;
+      gap: 0.8rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .contact-actions a {
+      text-decoration: none;
+      padding: 0.5rem 1.1rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .contact-actions .wh { background: #25D366; color: #fff; }
+    .contact-actions .em { background: #ffffff; border: 1px solid rgba(0,0,0,0.05); color: #073b4c; }
+
     footer {
       background: #0d1b2a;
       color: #fff;
       text-align: center;
-      padding: 1.5rem 0;
+      padding: 1.5rem 0 2.3rem;
       font-size: 0.8rem;
     }
+    footer .footer-contact {
+      margin-top: 0.65rem;
+      font-size: 0.8rem;
+      line-height: 1.4;
+    }
+
     @media(max-width: 920px) {
       .media-grid,
       .two-col,
@@ -234,39 +251,38 @@
     }
   </style>
 </head>
-
 <body>
   <header>
     <div class="container nav">
       <div class="brand">Aqua &amp; Arowana Care Hub</div>
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#care">Care</a></li>
-        <li><a href="#setup">Tank Setup</a></li>
-        <li><a href="#media">Media</a></li>
-        <li><a href="#resources">Resources</a></li>
-        <li><a href="#contact">Contact</a></li>
+      <ul id="top-nav">
+        <li><a data-tab="about" class="active">About</a></li>
+        <li><a data-tab="care">Care</a></li>
+        <li><a data-tab="setup">Tank Setup</a></li>
+        <li><a data-tab="media">Media</a></li>
+        <li><a data-tab="resources">Resources</a></li>
+        <li><a data-tab="contact">Contact</a></li>
       </ul>
     </div>
   </header>
 
-  <main>
-    <!-- HERO -->
-    <section class="hero">
-      <div class="container hero-grid">
-        <div>
-          <h1>Welcome to Aqua &amp; Arowana Care Hub</h1>
-          <p>Your complete guide for maintaining Asian Arowanas, predator tank mates and stable water parameters.</p>
-          <a href="#media" class="btn">View Gallery</a>
-        </div>
-        <div>
-          <img src="a1d779da-11f0-442c-b6fd-c7cb67b3bf69.jpg" alt="Hero Arowana" style="width:100%; border-radius:10px;">
-        </div>
+  <!-- HERO (always visible) -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <h1>Aqua &amp; Arowana Care Hub</h1>
+        <p>Your complete guide for maintaining Asian Arowanas, predator tank mates and stable water parameters.</p>
+        <a href="#media" class="btn" onclick="openTab('media');return false;">View Gallery</a>
       </div>
-    </section>
+      <div>
+        <img src="a1d779da-11f0-442c-b6fd-c7cb67b3bf69.jpg" alt="Hero Arowana" style="width:100%; border-radius:10px;">
+      </div>
+    </div>
+  </section>
 
-    <!-- ABOUT -->
-    <section id="about">
+  <main>
+    <!-- ABOUT TAB -->
+    <section id="about" class="tab-section active-tab">
       <div class="container">
         <div class="section-title">
           <h2>About Aqua &amp; Arowana Care Hub</h2>
@@ -292,8 +308,8 @@
       </div>
     </section>
 
-    <!-- AROWANA CARE -->
-    <section id="care">
+    <!-- CARE TAB -->
+    <section id="care" class="tab-section">
       <div class="container">
         <div class="section-title">
           <h2>Arowana Care Guides</h2>
@@ -339,8 +355,8 @@
       </div>
     </section>
 
-    <!-- TANK SETUP -->
-    <section id="setup" style="background:#ffffff;">
+    <!-- SETUP TAB -->
+    <section id="setup" class="tab-section" style="background:#ffffff;">
       <div class="container">
         <div class="section-title">
           <h2>Tank Setup &amp; Equipment</h2>
@@ -367,8 +383,8 @@
       </div>
     </section>
 
-    <!-- MEDIA / GALLERY -->
-    <section id="media">
+    <!-- MEDIA TAB -->
+    <section id="media" class="tab-section">
       <div class="container">
         <div class="section-title">
           <h2>Media &amp; Gallery</h2>
@@ -414,8 +430,8 @@
       <span class="lightbox-next" id="lb-next">&#10095;</span>
     </div>
 
-    <!-- RESOURCES -->
-    <section id="resources">
+    <!-- RESOURCES TAB -->
+    <section id="resources" class="tab-section">
       <div class="container">
         <div class="section-title">
           <h2>Latest Resources</h2>
@@ -441,31 +457,64 @@
       </div>
     </section>
 
-    <!-- CONTACT -->
-    <section id="contact">
+    <!-- CONTACT TAB -->
+    <section id="contact" class="tab-section">
       <div class="container" style="text-align:center;">
         <h2>Contact &amp; Advisory</h2>
-        <p>For tank setup, Riyadh water conditions, or Arowana behaviour queries, reach out directly.</p>
-        <p style="margin-top:10px;">📧 <strong>aqua.arowana.hub@gmail.com</strong></p>
+        <p>For tank setup, Riyadh water conditions, or Arowana behaviour queries – reach out directly to</p>
+        <p style="margin-top:10px; font-weight:600;">Eng. Mehr Khan</p>
+        <p>Email: <a href="mailto:mehr7Khan@gmail.com">mehr7Khan@gmail.com</a></p>
+        <p>Contact No.: <a href="tel:+966543123551">+966 543 123 551</a></p>
+        <div class="contact-actions">
+          <a class="wh" href="https://wa.me/966543123551" target="_blank" rel="noopener noreferrer">WhatsApp Me</a>
+          <a class="em" href="mailto:mehr7Khan@gmail.com">Send Email</a>
+        </div>
+        <p style="margin-top:1.2rem; font-size:0.75rem; opacity:0.8;">(We can embed a form here later and send to your email / WhatsApp)</p>
       </div>
     </section>
   </main>
 
   <footer>
     © <span id="year"></span> Aqua & Arowana Care Hub. All rights reserved.
+    <div class="footer-contact">
+      Contact: Mehr Khan |
+      <a href="mailto:mehr7Khan@gmail.com" style="color:#fff; text-decoration:underline;">mehr7Khan@gmail.com</a> |
+      <a href="https://wa.me/966543123551" style="color:#fff; text-decoration:underline;" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+    </div>
   </footer>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // ===== Lightbox with navigation (no captions) =====
+    // ---- Tabs ----
+    function openTab(tabId) {
+      // deactivate all tabs
+      document.querySelectorAll("section.tab-section").forEach(sec => sec.classList.remove("active-tab"));
+      document.getElementById(tabId).classList.add("active-tab");
+
+      // update nav
+      document.querySelectorAll("#top-nav a").forEach(a => a.classList.remove("active"));
+      document.querySelector('#top-nav a[data-tab="'+tabId+'"]').classList.add("active");
+
+      // if media tab opened, scroll slightly to show it under hero
+      window.scrollTo({ top: document.querySelector(".hero").offsetHeight - 10, behavior: "smooth" });
+    }
+
+    // attach click to nav
+    document.querySelectorAll("#top-nav a").forEach(a => {
+      a.addEventListener("click", function() {
+        const tab = this.getAttribute("data-tab");
+        openTab(tab);
+      });
+    });
+
+    // ---- Lightbox with navigation ----
     const galleryImages = document.querySelectorAll(".gallery-img");
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = document.getElementById("lightbox-img");
     const btnClose = document.getElementById("lb-close");
     const btnPrev = document.getElementById("lb-prev");
     const btnNext = document.getElementById("lb-next");
-
     let currentIndex = 0;
 
     function openLightbox(index) {
@@ -477,36 +526,25 @@
         lightbox.classList.add("show");
       });
     }
-
     function closeLightbox() {
       lightbox.classList.remove("show");
-      setTimeout(() => {
-        lightbox.style.display = "none";
-      }, 180);
+      setTimeout(() => { lightbox.style.display = "none"; }, 180);
     }
-
     function showNext() {
       currentIndex = (currentIndex + 1) % galleryImages.length;
       openLightbox(currentIndex);
     }
-
     function showPrev() {
       currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
       openLightbox(currentIndex);
     }
-
     galleryImages.forEach((img, index) => {
       img.addEventListener("click", () => openLightbox(index));
     });
-
     btnClose.addEventListener("click", closeLightbox);
     btnNext.addEventListener("click", showNext);
     btnPrev.addEventListener("click", showPrev);
-
-    lightbox.addEventListener("click", (e) => {
-      if (e.target === lightbox) closeLightbox();
-    });
-
+    lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
     document.addEventListener("keydown", (e) => {
       if (lightbox.style.display === "flex") {
         if (e.key === "Escape") closeLightbox();
