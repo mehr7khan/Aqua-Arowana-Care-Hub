@@ -1,1 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Aqua & Arowana Care Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Aqua & Arowana Care Hub – practical guidance on Arowana health, feeding, tank setup, compatible fishes and aquarium management." />
+  <style>
+    :root {
+      --primary: #006d77;
+      --accent: #ffb703;
+      --dark: #073b4c;
+      --bg: #f5f7f8;
+      --white: #ffffff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: #222;
+      line-height: 1.6;
+    }
+    header {
+      background: var(--white);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.2rem;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .brand {
+      font-weight: 700;
+      color: var(--dark);
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+    }
+    .nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1rem;
+    }
+    .nav a {
+      text-decoration: none;
+      color: #333;
+      font-size: 0.9rem;
+    }
+    .nav a:hover {
+      color: var(--primary);
+    }
+    .hero {
+      background: linear-gradient(115deg, #093f53 0%, #006d77 68%, #0fa3b1 100%);
+      color: #fff;
+      padding: 4.5rem 0 4rem;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      line-height: 1.1;
+    }
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      padding: 0.65rem 1.4rem;
+      color: #1b2a41;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    section { padding: 3.3rem 0; }
+    .section-title {
+      text-align: center;
+      margin-bottom: 2.3rem;
+    }
+    .media-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: 0;
+    }
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 0.8rem;
+    }
+    .image-grid img {
+      width: 100%;
+      border-radius: 10px;
+      object-fit: cover;
+      height: 130px;
+    }
+    footer {
+      background: #0d1b2a;
+      color: #fff;
+      text-align: center;
+      padding: 1.5rem 0;
+      font-size: 0.8rem;
+    }
+    @media(max-width: 920px) {
+      .media-grid { grid-template-columns: 1fr; }
+      .nav ul { display: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">Aqua &amp; Arowana Care Hub</div>
+      <ul>
+        <li><a href="#media">Media</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <h1>Welcome to Aqua &amp; Arowana Care Hub</h1>
+          <p>Your complete guide for maintaining Asian Arowanas, tank mates, and aquarium health. Curated by hobbyists for hobbyists.</p>
+          <a href="#media" class="btn">View Gallery</a>
+        </div>
+        <div>
+          <img src="a1d779da-11f0-442c-b6fd-c7cb67b3bf69.jpg" alt="Hero Arowana" style="width:100%; border-radius:10px;">
+        </div>
+      </div>
+    </section>
+
+    <!-- Media Section -->
+    <section id="media">
+      <div class="container">
+        <div class="section-title">
+          <h2>Media & Gallery</h2>
+          <p>Exclusive Arowana videos and images from BOSS’s personal tank collection.</p>
+        </div>
+
+        <div class="media-grid">
+          <!-- Video Section -->
+          <div>
+            <h3>Featured Videos</h3>
+            <div class="video-wrapper">
+              <iframe src="https://www.youtube.com/embed/cvT5min95wE?rel=0" title="Arowana Video 1" allowfullscreen></iframe>
+            </div>
+            <br>
+            <div class="video-wrapper">
+              <iframe src="https://www.youtube.com/embed/O5sbYTgOllU?rel=0" title="Arowana Video 2" allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <!-- Image Gallery -->
+          <div>
+            <h3>Gallery Highlights</h3>
+            <div class="image-grid">
+              <img src="0a1cd555-99d4-475a-9e81-e0356707b558.jpg" alt="Arowana Side View">
+              <img src="039fe5cd-7dfd-49c3-9c32-1d7d0955cd0f.jpg" alt="Golden Arowana">
+              <img src="2b7cdbf0-2e01-4626-af11-5cb38cf2c76f.jpg" alt="Light Tank View">
+              <img src="949965b0-6e9f-4fd3-b6a9-87ca9a8729a8.jpg" alt="Three Arowanas">
+              <img src="1df8256c-a377-48b9-bf56-dcbf4a0882a6.jpg" alt="Pair Arowanas">
+              <img src="43e2bb50-724c-40fa-96a3-eda0dbb18dfc.jpg" alt="Tank Overview">
+              <img src="WhatsApp Image 2025-10-30 at 9.41.49 AM.jpeg" alt="Arowana and Peacock Bass">
+              <img src="WhatsApp Image 2025-10-30 at 9.41.27 AM.jpeg" alt="Arowana Group">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container" style="text-align:center;">
+        <h2>Contact & Advisory</h2>
+        <p>For tank setup, water conditions, or Arowana behaviour queries, reach out directly.</p>
+        <p style="margin-top:10px;">📧 <strong>aqua.arowana.hub@gmail.com</strong></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Aqua & Arowana Care Hub. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
 
