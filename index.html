@@ -19,6 +19,7 @@
       background: var(--bg);
       color: #222;
       line-height: 1.6;
+      scroll-behavior: smooth;
     }
     header {
       background: var(--white);
@@ -73,6 +74,7 @@
       margin-bottom: 1rem;
       line-height: 1.1;
     }
+    .hero p { margin-bottom: 1rem; }
     .btn {
       display: inline-block;
       background: var(--accent);
@@ -87,6 +89,40 @@
     .section-title {
       text-align: center;
       margin-bottom: 2.3rem;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background: #fff;
+      padding: 1.4rem 1.2rem 1.3rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      border: 1px solid rgba(0,0,0,0.03);
+    }
+    .card h4 {
+      margin-bottom: 0.4rem;
+      color: var(--dark);
+    }
+    .tag {
+      display: inline-block;
+      background: rgba(0,109,119,0.05);
+      color: var(--dark);
+      font-size: 0.7rem;
+      padding: 0.3rem 0.6rem;
+      border-radius: 999px;
+      margin-bottom: 0.5rem;
+    }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+    .list-check li {
+      margin-bottom: 0.45rem;
     }
     .media-grid {
       display: grid;
@@ -124,7 +160,6 @@
     .image-grid img:hover {
       transform: scale(1.02);
     }
-
     /* ===== LIGHTBOX (popup) ===== */
     .lightbox {
       display: none;
@@ -162,8 +197,6 @@
       cursor: pointer;
       z-index: 10000;
     }
-
-    /* arrows */
     .lightbox-prev, .lightbox-next {
       position: fixed;
       top: 50%;
@@ -185,7 +218,6 @@
     .lightbox-prev:hover, .lightbox-next:hover {
       background: rgba(0,0,0,0.6);
     }
-
     footer {
       background: #0d1b2a;
       color: #fff;
@@ -194,9 +226,10 @@
       font-size: 0.8rem;
     }
     @media(max-width: 920px) {
-      .media-grid { grid-template-columns: 1fr; }
-      .nav ul { display: none; }
+      .media-grid,
+      .two-col,
       .hero-grid { grid-template-columns: 1fr; }
+      .nav ul { display: none; }
       .lightbox-prev, .lightbox-next { top: 90%; }
     }
   </style>
@@ -207,18 +240,23 @@
     <div class="container nav">
       <div class="brand">Aqua &amp; Arowana Care Hub</div>
       <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#care">Care</a></li>
+        <li><a href="#setup">Tank Setup</a></li>
         <li><a href="#media">Media</a></li>
+        <li><a href="#resources">Resources</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
   </header>
 
   <main>
+    <!-- HERO -->
     <section class="hero">
       <div class="container hero-grid">
         <div>
           <h1>Welcome to Aqua &amp; Arowana Care Hub</h1>
-          <p>Your complete guide for maintaining Asian Arowanas, tank mates, and aquarium health. Curated by hobbyists for hobbyists.</p>
+          <p>Your complete guide for maintaining Asian Arowanas, predator tank mates and stable water parameters.</p>
           <a href="#media" class="btn">View Gallery</a>
         </div>
         <div>
@@ -227,11 +265,113 @@
       </div>
     </section>
 
-    <!-- Media Section -->
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container">
+        <div class="section-title">
+          <h2>About Aqua &amp; Arowana Care Hub</h2>
+          <p>Knowledge base for Arowana owners, curated for Middle East hobbyists, especially for large display tanks.</p>
+        </div>
+        <div class="cards">
+          <div class="card">
+            <span class="tag">Care Standards</span>
+            <h4>Evidence-based care</h4>
+            <p>Water quality, diet rotation, tank-mate selection – explained in practical language.</p>
+          </div>
+          <div class="card">
+            <span class="tag">Problem Solving</span>
+            <h4>What if fish stops eating?</h4>
+            <p>Troubleshooting guides for stress, aggression, fasting, and travelling owners.</p>
+          </div>
+          <div class="card">
+            <span class="tag">For Display Tanks</span>
+            <h4>Large tank focus</h4>
+            <p>Advice for 5–8 ft tanks, long wallpapers, and multi-fish predator setups.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AROWANA CARE -->
+    <section id="care">
+      <div class="container">
+        <div class="section-title">
+          <h2>Arowana Care Guides</h2>
+          <p>Start with these core routines.</p>
+        </div>
+        <div class="two-col">
+          <div>
+            <h3>1. Feeding Strategy</h3>
+            <ul class="list-check">
+              <li>Primary: pellets, prawns, earthworms, crickets</li>
+              <li>Occasional: chicken heart (not daily), superworms</li>
+              <li>1–2 feedings / day, reduce during travel</li>
+              <li>Train young fish to accept floating food</li>
+            </ul>
+
+            <h3 style="margin-top:1.2rem;">2. Water Parameters</h3>
+            <ul class="list-check">
+              <li>Temp: <strong>28–30°C</strong></li>
+              <li>pH: <strong>6.5–7.2</strong></li>
+              <li>Weekly 20–30% water change</li>
+              <li>Dechlorinate &amp; match temp</li>
+            </ul>
+
+            <h3 style="margin-top:1.2rem;">3. Behaviour &amp; Tank Mates</h3>
+            <ul class="list-check">
+              <li>Monitor aggression when adding new Arowana</li>
+              <li>Compatible: Peacock Bass, Datnoid, Stingray (size match)</li>
+              <li>Avoid fin-nippers and small fish</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Downloadable SOPs (later)</h4>
+            <p>You can add PDFs for:</p>
+            <ul>
+              <li>Arowana Fasting Management</li>
+              <li>Vacation Feeding SOP</li>
+              <li>Quarantine Procedure</li>
+              <li>Lighting / Tanning Setup</li>
+            </ul>
+            <p style="margin-top:0.8rem;">We can link Google Drive / OneDrive here.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TANK SETUP -->
+    <section id="setup" style="background:#ffffff;">
+      <div class="container">
+        <div class="section-title">
+          <h2>Tank Setup &amp; Equipment</h2>
+          <p>Build once, then maintain easily.</p>
+        </div>
+        <div class="cards">
+          <div class="card">
+            <h4>Tank Size</h4>
+            <p>Min 5 ft for single Arowana. For 3 Arowanas + Peacock Bass, go 7–8 ft, 60–70 cm height.</p>
+          </div>
+          <div class="card">
+            <h4>Filtration</h4>
+            <p>Sump with 3–4 chambers, bio media, return pump. Add surface skimmer if using tanning light.</p>
+          </div>
+          <div class="card">
+            <h4>Lighting</h4>
+            <p>Normal day light + tanning light cycles. Avoid 24/7 strong light → stress.</p>
+          </div>
+          <div class="card">
+            <h4>Backup / Vacation Mode</h4>
+            <p>Auto feeder, stable temp, pre-measured food, caretaker notes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MEDIA / GALLERY -->
     <section id="media">
       <div class="container">
         <div class="section-title">
-          <h2>Media & Gallery</h2>
+          <h2>Media &amp; Gallery</h2>
           <p>Exclusive Arowana videos and images from BOSS’s personal tank collection.</p>
         </div>
 
@@ -266,7 +406,7 @@
       </div>
     </section>
 
-    <!-- LIGHTBOX (no caption now) -->
+    <!-- LIGHTBOX (no caption) -->
     <div id="lightbox" class="lightbox">
       <span class="lightbox-close" id="lb-close">&times;</span>
       <span class="lightbox-prev" id="lb-prev">&#10094;</span>
@@ -274,9 +414,37 @@
       <span class="lightbox-next" id="lb-next">&#10095;</span>
     </div>
 
+    <!-- RESOURCES -->
+    <section id="resources">
+      <div class="container">
+        <div class="section-title">
+          <h2>Latest Resources</h2>
+          <p>Add your care notes, cases, or YouTube links here.</p>
+        </div>
+        <div class="cards">
+          <div class="card">
+            <h4>Recovering a stressed Arowana</h4>
+            <p>Reduce lighting, keep water pristine, feed small meals. Observe gill movement.</p>
+            <a href="#" style="font-size:0.8rem; color:var(--primary); text-decoration:none;">Read more →</a>
+          </div>
+          <div class="card">
+            <h4>When fish eats only sinking food</h4>
+            <p>Gradual training: mix sinking + floating, reduce current, feed at same time.</p>
+            <a href="#" style="font-size:0.8rem; color:var(--primary); text-decoration:none;">Read more →</a>
+          </div>
+          <div class="card">
+            <h4>Predator community tanks</h4>
+            <p>Stock in batches, match sizes, give hiding places for new fish.</p>
+            <a href="#" style="font-size:0.8rem; color:var(--primary); text-decoration:none;">Read more →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
     <section id="contact">
       <div class="container" style="text-align:center;">
-        <h2>Contact & Advisory</h2>
+        <h2>Contact &amp; Advisory</h2>
         <p>For tank setup, Riyadh water conditions, or Arowana behaviour queries, reach out directly.</p>
         <p style="margin-top:10px;">📧 <strong>aqua.arowana.hub@gmail.com</strong></p>
       </div>
