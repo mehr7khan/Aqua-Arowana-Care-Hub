@@ -162,13 +162,6 @@
       cursor: pointer;
       z-index: 10000;
     }
-    .lightbox-caption {
-      color: #ddd;
-      text-align: center;
-      margin-top: 12px;
-      max-width: 80%;
-      font-size: 0.9rem;
-    }
 
     /* arrows */
     .lightbox-prev, .lightbox-next {
@@ -204,9 +197,7 @@
       .media-grid { grid-template-columns: 1fr; }
       .nav ul { display: none; }
       .hero-grid { grid-template-columns: 1fr; }
-      .lightbox-prev, .lightbox-next {
-        top: 90%;
-      }
+      .lightbox-prev, .lightbox-next { top: 90%; }
     }
   </style>
 </head>
@@ -261,27 +252,26 @@
           <div>
             <h3>Gallery Highlights (click to enlarge)</h3>
             <div class="image-grid">
-              <img src="0a1cd555-99d4-475a-9e81-e0356707b558.jpg" alt="RTG Arowana | 30°C | Sump Filtration" class="gallery-img">
-              <img src="039fe5cd-7dfd-49c3-9c32-1d7d0955cd0f.jpg" alt="Golden Arowana | Solo Tank" class="gallery-img">
-              <img src="2b7cdbf0-2e01-4626-af11-5cb38cf2c76f.jpg" alt="Display Tank | Daylight" class="gallery-img">
-              <img src="949965b0-6e9f-4fd3-b6a9-87ca9a8729a8.jpg" alt="Multiple Arowanas | Divider" class="gallery-img">
-              <img src="1df8256c-a377-48b9-bf56-dcbf4a0882a6.jpg" alt="Pair Arowanas | Tanning Light" class="gallery-img">
-              <img src="43e2bb50-724c-40fa-96a3-eda0dbb18dfc.jpg" alt="Side View | Clean Water" class="gallery-img">
-              <img src="WhatsApp Image 2025-10-30 at 9.41.49 AM.jpeg" alt="Arowana with Peacock Bass | Community Predator" class="gallery-img">
-              <img src="WhatsApp Image 2025-10-30 at 9.41.27 AM.jpeg" alt="3 Arowanas | Blue Tank" class="gallery-img">
+              <img src="0a1cd555-99d4-475a-9e81-e0356707b558.jpg" alt="RTG Arowana" class="gallery-img">
+              <img src="039fe5cd-7dfd-49c3-9c32-1d7d0955cd0f.jpg" alt="Golden Arowana" class="gallery-img">
+              <img src="2b7cdbf0-2e01-4626-af11-5cb38cf2c76f.jpg" alt="Light View" class="gallery-img">
+              <img src="949965b0-6e9f-4fd3-b6a9-87ca9a8729a8.jpg" alt="Arowanas" class="gallery-img">
+              <img src="1df8256c-a377-48b9-bf56-dcbf4a0882a6.jpg" alt="Arowanas" class="gallery-img">
+              <img src="43e2bb50-724c-40fa-96a3-eda0dbb18dfc.jpg" alt="Arowana / Peacock Bass" class="gallery-img">
+              <img src="WhatsApp Image 2025-10-30 at 9.41.49 AM.jpeg" alt="Arowanas" class="gallery-img">
+              <img src="WhatsApp Image 2025-10-30 at 9.41.27 AM.jpeg" alt="Arowanas" class="gallery-img">
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- LIGHTBOX HTML (one-time) -->
+    <!-- LIGHTBOX (no caption now) -->
     <div id="lightbox" class="lightbox">
       <span class="lightbox-close" id="lb-close">&times;</span>
       <span class="lightbox-prev" id="lb-prev">&#10094;</span>
       <img class="lightbox-img" id="lightbox-img" src="" alt="Arowana enlarged">
       <span class="lightbox-next" id="lb-next">&#10095;</span>
-      <div class="lightbox-caption" id="lightbox-caption"></div>
     </div>
 
     <section id="contact">
@@ -300,25 +290,21 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // ===== Lightbox with navigation =====
+    // ===== Lightbox with navigation (no captions) =====
     const galleryImages = document.querySelectorAll(".gallery-img");
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = document.getElementById("lightbox-img");
-    const lightboxCaption = document.getElementById("lightbox-caption");
     const btnClose = document.getElementById("lb-close");
     const btnPrev = document.getElementById("lb-prev");
     const btnNext = document.getElementById("lb-next");
 
-    let currentIndex = 0; // track current image
+    let currentIndex = 0;
 
     function openLightbox(index) {
       currentIndex = index;
       const img = galleryImages[currentIndex];
       lightboxImg.src = img.src;
-      lightboxCaption.textContent = img.alt || "";
       lightbox.style.display = "flex";
-
-      // force fade
       requestAnimationFrame(() => {
         lightbox.classList.add("show");
       });
@@ -326,7 +312,6 @@
 
     function closeLightbox() {
       lightbox.classList.remove("show");
-      // small timeout to let fade-out look smooth
       setTimeout(() => {
         lightbox.style.display = "none";
       }, 180);
@@ -342,24 +327,18 @@
       openLightbox(currentIndex);
     }
 
-    // click on images
     galleryImages.forEach((img, index) => {
       img.addEventListener("click", () => openLightbox(index));
     });
 
-    // buttons
     btnClose.addEventListener("click", closeLightbox);
     btnNext.addEventListener("click", showNext);
     btnPrev.addEventListener("click", showPrev);
 
-    // click on backdrop to close
     lightbox.addEventListener("click", (e) => {
-      if (e.target === lightbox) {
-        closeLightbox();
-      }
+      if (e.target === lightbox) closeLightbox();
     });
 
-    // keyboard support
     document.addEventListener("keydown", (e) => {
       if (lightbox.style.display === "flex") {
         if (e.key === "Escape") closeLightbox();
