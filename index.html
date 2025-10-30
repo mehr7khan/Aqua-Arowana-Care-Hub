@@ -118,6 +118,47 @@
       border-radius: 10px;
       object-fit: cover;
       height: 130px;
+      cursor: pointer; /* so user knows it's clickable */
+      transition: transform 0.15s ease;
+    }
+    .image-grid img:hover {
+      transform: scale(1.02);
+    }
+    /* ===== LIGHTBOX (popup) ===== */
+    .lightbox {
+      display: none; /* hidden by default */
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.85);
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .lightbox-img {
+      max-width: 90%;
+      max-height: 85vh;
+      border-radius: 10px;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.4);
+    }
+    .lightbox-close {
+      position: fixed;
+      top: 18px;
+      right: 28px;
+      color: #fff;
+      font-size: 32px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .lightbox-caption {
+      color: #ddd;
+      text-align: center;
+      margin-top: 12px;
+      max-width: 80%;
     }
     footer {
       background: #0d1b2a;
@@ -129,6 +170,7 @@
     @media(max-width: 920px) {
       .media-grid { grid-template-columns: 1fr; }
       .nav ul { display: none; }
+      .hero-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -181,21 +223,28 @@
 
           <!-- Image Gallery -->
           <div>
-            <h3>Gallery Highlights</h3>
+            <h3>Gallery Highlights (click to enlarge)</h3>
             <div class="image-grid">
-              <img src="0a1cd555-99d4-475a-9e81-e0356707b558.jpg" alt="Arowana Side View">
-              <img src="039fe5cd-7dfd-49c3-9c32-1d7d0955cd0f.jpg" alt="Golden Arowana">
-              <img src="2b7cdbf0-2e01-4626-af11-5cb38cf2c76f.jpg" alt="Light Tank View">
-              <img src="949965b0-6e9f-4fd3-b6a9-87ca9a8729a8.jpg" alt="Three Arowanas">
-              <img src="1df8256c-a377-48b9-bf56-dcbf4a0882a6.jpg" alt="Pair Arowanas">
-              <img src="43e2bb50-724c-40fa-96a3-eda0dbb18dfc.jpg" alt="Tank Overview">
-              <img src="WhatsApp Image 2025-10-30 at 9.41.49 AM.jpeg" alt="Arowana and Peacock Bass">
-              <img src="WhatsApp Image 2025-10-30 at 9.41.27 AM.jpeg" alt="Arowana Group">
+              <img src="0a1cd555-99d4-475a-9e81-e0356707b558.jpg" alt="Arowana Side View" class="gallery-img">
+              <img src="039fe5cd-7dfd-49c3-9c32-1d7d0955cd0f.jpg" alt="Golden Arowana" class="gallery-img">
+              <img src="2b7cdbf0-2e01-4626-af11-5cb38cf2c76f.jpg" alt="Light Tank View" class="gallery-img">
+              <img src="949965b0-6e9f-4fd3-b6a9-87ca9a8729a8.jpg" alt="Three Arowanas" class="gallery-img">
+              <img src="1df8256c-a377-48b9-bf56-dcbf4a0882a6.jpg" alt="Pair Arowanas" class="gallery-img">
+              <img src="43e2bb50-724c-40fa-96a3-eda0dbb18dfc.jpg" alt="Tank Overview" class="gallery-img">
+              <img src="WhatsApp Image 2025-10-30 at 9.41.49 AM.jpeg" alt="Arowana and Peacock Bass" class="gallery-img">
+              <img src="WhatsApp Image 2025-10-30 at 9.41.27 AM.jpeg" alt="Arowana Group" class="gallery-img">
             </div>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- LIGHTBOX HTML (one-time) -->
+    <div id="lightbox" class="lightbox">
+      <span class="lightbox-close">&times;</span>
+      <img class="lightbox-img" id="lightbox-img" src="" alt="Arowana enlarged">
+      <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
 
     <section id="contact">
       <div class="container" style="text-align:center;">
@@ -212,6 +261,39 @@
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // ===== Lightbox JS =====
+    const galleryImages = document.querySelectorAll(".gallery-img");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    const lightboxCaption = document.getElementById("lightbox-caption");
+    const lightboxClose = document.querySelector(".lightbox-close");
+
+    galleryImages.forEach(img => {
+      img.addEventListener("click", function () {
+        lightbox.style.display = "flex";
+        lightboxImg.src = this.src;
+        lightboxCaption.textContent = this.alt || "Arowana";
+      });
+    });
+
+    lightboxClose.addEventListener("click", function () {
+      lightbox.style.display = "none";
+    });
+
+    // close on click outside image
+    lightbox.addEventListener("click", function (e) {
+      if (e.target === lightbox) {
+        lightbox.style.display = "none";
+      }
+    });
+
+    // close with ESC
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        lightbox.style.display = "none";
+      }
+    });
   </script>
 </body>
 </html>
